@@ -53,30 +53,30 @@
               }else{
                 unit = ""; 
                 unit = dataGroup[1].v;
-                if(!dataGroup[3]){
-                  unit_sloution = "None";
+                if(!dataGroup[2]){
+                  unit_sloution = "無資料";
                 }else{
-                  unit_sloution = dataGroup[3].v;
+                  unit_sloution = dataGroup[2].v;
                 }
-                if(!dataGroup[4]){
-                  off_news = "None";
+                if(!dataGroup[3]){
+                  off_news = "無資料";
                 }else{
-                  off_news = dataGroup[4].v;
+                  off_news = dataGroup[3].v;
                 }
               }
               if(!dataGroup[5]){
-                unoff_news_unit = "None";
-                unoff_news = "None";
+                unoff_news_unit = "無資料";
+                unoff_news = "無資料";
               }else{
                 unoff_news_unit = dataGroup[5].v;
                 if(!dataGroup[7]){
-                  unoff_news = "None";
+                  unoff_news = "無資料";
                 }else{
                   unoff_news = dataGroup[7].v;
                 }
               }
               if(!dataGroup[8]){
-                other_inf = "None";
+                other_inf = "無資料";
               }else{
                 other_inf = dataGroup[8].v;
               }
@@ -98,7 +98,7 @@
       _rightleft = 0; //0-left 1-right
       month = 0;
       var _obj = reverseObject(obj);
-      console.log(_obj);
+      //console.log(_obj);
       ch_month = ['none','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
       var $cSel = $('.VivaTimeline dl');
       //$cSel.append($("<dl></dl>");
@@ -121,7 +121,7 @@
           $cSel.append('<dt>'+ch_month[_m]+'</dt>');
         }
         _data = _obj[key]
-        console.log(_data);
+        //console.log(_data);
         _day_content = '';
         html = '';
         _inf_count = 0;
@@ -129,16 +129,20 @@
           _inf_count ++;
           _title = _data[i].off_news[0];
           //_content = _data[i].off_news[1];
-          _news_content = _data[i].off_news[1];
-          _day_content += '<div class=row><div class="col-md-6 pull-left"></div><div class=events-desc>'+'['+_title+']<br>'+_news_content+'</div></div>'
+          _news_content = _data[i].off_news[2];
+          _unit_sloution = _data[i].off_news[1];
+          _day_content += '<div class=offnews><div class=unit_title>'+_title+'<div class=sloution>'+_unit_sloution+'</div></div><div class=off_unit_news>'+_news_content+'</div></div><br>';
 
         }
-        _foot = '<div class="events-footer">'+_inf_count+'</div>';
+        //_foot = '<div class="events-footer">'+_inf_count+'</div>';
+        /*
         if(_inf_count > 1) {
-          html = '<dd class="'+_pos+'"><div class=circ></div><div class=time>'+_m+'月'+_d+'日</div><div class=events><div class=events-header>'+'</div><div class=events-body>'+_day_content+'</div>'+_foot+'</div></dd>';
+          html = '<dd class="'+_pos+'"><div class=circ></div><div class=time>'+_m+'月'+_d+'日</div><div class=events><div class=events-header>'+'</div><div class=events-body>'+_day_content+'</div>'+'</div></dd>';
         }else{
           html = '<dd class="'+_pos+'"><div class=circ></div><div class=time>'+_m+'月'+_d+'日</div><div class=events><div class=events-header>'+'</div><div class=events-body>'+_day_content+'</div></div></dd>';
-        }
+        }*/
+        html = '<dd class="'+_pos+'"><div class=circ></div><div class=time>'+_m+'月'+_d+'日</div><div class=events><div class=events-header>'+'</div><div class=events-body><div class=row><div class="col-md-6 pull-left"></div><div class=events-desc>'+_day_content+'</div></div></div>'+'</div></dd>';
+
         //產生網頁
         $cSel.append(html);
       }

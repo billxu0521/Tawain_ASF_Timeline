@@ -1,0 +1,22 @@
+.offnews{
+	background-color: #FFFFFF;
+	border-radius :5px;
+	text-indent: 1em;
+    padding: 0 15p;
+}
+
+.unit_title{
+	text-indent: 0em;
+	font-size: 18px;
+}
+
+.off_unit_news{
+	font-size: 20px;
+	color: #848484;
+}
+
+.sloution{
+	display:contents;
+	font-size: 14px;
+	color: #77bdff;
+}
