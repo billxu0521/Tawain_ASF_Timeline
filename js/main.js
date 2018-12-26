@@ -33,12 +33,12 @@
         unit = '';
         off_news = '';
         unit_sloution = '';
-        rowArray.reverse();
+        
         for (i = 0; i < rowLength; i++) {
           dataGroup = rowArray[i].c;
           dataLength = dataGroup.length;
           //console.log(dataGroup);
-            if (!dataGroup) {
+            if (dataGroup == null) {
               continue;
             }else{
               if(!dataGroup[0]){
@@ -97,10 +97,12 @@
     function creattimedata(obj){
       _rightleft = 0; //0-left 1-right
       month = 0;
+      var _obj = reverseObject(obj);
+      console.log(_obj);
       ch_month = ['none','一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
       var $cSel = $('.VivaTimeline dl');
       //$cSel.append($("<dl></dl>");
-      for (var key in obj) {
+      for (var key in _obj) {
         _pos = 'pos-left clearfix';
         if(_rightleft == 0){
           _pos = 'pos-left clearfix';
@@ -118,14 +120,41 @@
           //console.log('month');
           $cSel.append('<dt>'+ch_month[_m]+'</dt>');
         }
-        _data = obj[key]
-        //console.log(_data);
+        _data = _obj[key]
+        console.log(_data);
+        _day_content = '';
+        html = '';
+        _inf_count = 0;
         for(var i = 0; i < _data.length; i++){
+          _inf_count ++;
           _title = _data[i].off_news[0];
-          _content = _data[i].off_news[1];    
-          html = '<dd class="'+_pos+'"><div class=circ></div><div class=time>'+_m+'月'+_d+'日</div><div class=events><div class=events-header>'+_title+'</div><div class=events-body><div class=row><div class="col-md-6 pull-left"></div><div class=events-desc>'+_content+'</div></div></div></div></dd>';
-          //產生網頁
-          $cSel.append(html);
+          //_content = _data[i].off_news[1];
+          _news_content = _data[i].off_news[1];
+          _day_content += '<div class=row><div class="col-md-6 pull-left"></div><div class=events-desc>'+'['+_title+']<br>'+_news_content+'</div></div>'
+
         }
+        _foot = '<div class="events-footer">'+_inf_count+'</div>';
+        if(_inf_count > 1) {
+          html = '<dd class="'+_pos+'"><div class=circ></div><div class=time>'+_m+'月'+_d+'日</div><div class=events><div class=events-header>'+'</div><div class=events-body>'+_day_content+'</div>'+_foot+'</div></dd>';
+        }else{
+          html = '<dd class="'+_pos+'"><div class=circ></div><div class=time>'+_m+'月'+_d+'日</div><div class=events><div class=events-header>'+'</div><div class=events-body>'+_day_content+'</div></div></dd>';
         }
+        //產生網頁
+        $cSel.append(html);
+      }
     }
+
+    function reverseObject(object) {
+        var newObject = {};
+        var keys = [];
+        for (var key in object) {
+            keys.push(key);
+        }
+        for (var i = keys.length - 1; i >= 0; i--) {
+
+          var value = object[keys[i]];
+          newObject[keys[i]]= value;
+        }       
+
+        return newObject;
+      }

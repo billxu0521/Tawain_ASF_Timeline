@@ -34,10 +34,7 @@
     //網頁開始執行
     $(function ()  {
       get_data();
-      $('.VivaTimeline').vivaTimeline({
-        carousel: true,
-        carouselTime: 3000
-      });
+      
     });
     </script>
   </head>
@@ -101,7 +98,19 @@
       </div>
       <!-- /.container -->
     </footer>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      
+    });
+    window.onload=function(){
+  console.log('load');
+      $('.VivaTimeline').vivaTimeline({
+        carousel: true,
+        carouselTime: 3000
+      });
+}
 
+  </script>
   </body>
 
 </html>
